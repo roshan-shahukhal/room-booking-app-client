@@ -12,6 +12,7 @@ import { RoomDetailComponent } from './admin/rooms/room-detail/room-detail.compo
 import { UserDetailComponent } from './admin/users/user-detail/user-detail.component';
 import { UserEditComponent } from './admin/users/user-edit/user-edit.component';
 import { FormsModule } from '@angular/forms';
+import { UserAddComponent } from './admin/users/user-add/user-add.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
     PageNotFoundComponent,
     UserDetailComponent,
     UserEditComponent,
+    UserAddComponent,
   ],
   imports: [
     BrowserModule,

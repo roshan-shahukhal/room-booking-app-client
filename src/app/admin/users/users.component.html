@@ -26,6 +26,7 @@
     
     <div class="col-6">
         <app-user-detail [user]="selectedUser" *ngIf="action === 'view'"></app-user-detail>
-        <app-user-edit [user]="selectedUser" *ngIf="action === 'edit' || action === 'add'"></app-user-edit>
+        <app-user-edit [user]="selectedUser" *ngIf="action === 'edit'"></app-user-edit>
+        <app-user-add *ngIf="action === 'add'"></app-user-add>
     </div>
 </div>

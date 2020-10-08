@@ -15,33 +15,18 @@ export class UserEditComponent implements OnInit {
 
   formUser: User;
 
-  action: string;
-
-  password: string;
-
   constructor(private dataService: DataService,
-              private router: Router) { 
-    
-  }
+              private router: Router) {}
 
   ngOnInit(): void {
     this.formUser = Object.assign({}, this.user);
   }
 
-  onSaveOrUpdate() {
-    if (this.formUser.id == null) {
-      this.dataService.addNewUser(this.formUser, this.password).subscribe(
-        (user) => {
-        this.router.navigate(['admin', 'users'], {queryParams: {id: user.id, action: 'view'}});
-      });
-    } else {
+  onUpdate() {
       this.dataService.updateUser(this.formUser).subscribe(
         (user) => {
           this.router.navigate(['admin', 'users'], {queryParams: {id: user.id, action: 'view'}});
         }
       );
-    }
-    
   }
-
 }
