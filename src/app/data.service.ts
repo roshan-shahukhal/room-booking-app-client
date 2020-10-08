@@ -19,6 +19,26 @@ export class DataService {
     return of(this.users);
   }
 
+  updateUser(user: User): Observable<User> {
+    const originalUser = this.users.find(u => u.id === user.id);
+    originalUser.name = user.name;
+
+    return of(originalUser);
+  }
+
+  addNewUser(newUser: User, password: string): Observable<User> {
+    let id = 0;
+    for (const user of this.users) {
+      if (id < user.id) {
+        id = user.id;
+      }
+    }
+
+    newUser.id = id + 1;
+    this.users.push(newUser);
+    return of(newUser);
+  }
+
   constructor() { 
     this.rooms = new Array<Room>();
 
@@ -55,13 +75,13 @@ export class DataService {
 
     const user1 = new User();
     user1.id = 1;
-    user1.name = 'Roshan Shahukhal';
+    user1.name = 'Jane Doe';
     user1.password = 'p@ssword';
 
     const user2 = new User();
     user2.id = 2;
-    user2.name = 'Sabina Bade';
-    user2.password = 'sabina';
+    user2.name = 'James Smith';
+    user2.password = 'james';
 
     this.users.push(user1, user2);
 

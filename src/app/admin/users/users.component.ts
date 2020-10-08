@@ -2,6 +2,7 @@ import { DataService } from './../../data.service';
 import { User } from './../../model/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-users',
@@ -38,6 +39,11 @@ export class UsersComponent implements OnInit {
 
   setUser(id: number) {
     this.router.navigate(['admin', 'users'], {queryParams: {id : id, action: 'view'}});
+  }
+
+  onNewUserAdd() {
+    this.selectedUser = new User();
+    this.router.navigate(['admin', 'users'], {queryParams: {action: 'add'}});
   }
 
 }
