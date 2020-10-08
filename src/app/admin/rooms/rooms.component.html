@@ -1,0 +1,30 @@
+<h2>Rooms Admin</h2>
+
+<a class="btn btn-warning mb-3">Add Room</a>
+<div class="row">
+    <div class="col-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let room of rooms">
+                    <td> {{ room.id }}</td>
+                    <td> {{ room.name }}</td>
+                    <td> 
+                        <button type="button" (click)="setRoom(room.id)" class="btn btn-primary">View Room</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <div class="col-6">
+        <app-room-detail [room]="selectedRoom" *ngIf="selectedRoom"></app-room-detail>
+    </div>
+</div>

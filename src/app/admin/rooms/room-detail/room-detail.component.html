@@ -1,0 +1,29 @@
+<div class="roomDetails col-12">
+    <h4>Room Details</h4>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <tr>
+                    <td>ID</td>
+                    <td>{{ room.id }}</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>{{ room.location }}</td>
+                </tr>
+            </table>
+
+            <h6>This room can accomodate : </h6>
+            <table class="table">
+                <tr *ngFor="let layoutCapacity of room.capacities">
+                    <td>{{ layoutCapacity.layout }}</td>
+                    <td>{{ layoutCapacity.capacity }}</td>
+                </tr>
+            </table>
+
+        </div>
+        
+    </div>
+    <a class="btn btn-small btn-warning btn-style">Edit Room</a>
+    <a class="btn btn-small btn-warning btn-style">Delete Room</a>
+</div>
