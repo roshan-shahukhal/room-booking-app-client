@@ -1,18 +1,22 @@
 <h4>Edit User</h4>
 
 <form #userForm="ngForm">
-      <div class="col-md-12 mb-6">
-        <label for="name">Name</label>
-        <input type="text" class="form-control {{ formUser.name == '' ? 'is-invalid' : 'is-valid'}}" id="name" [(ngModel)]="formUser.name" name="name" required>
-        <div class="invalid-feedback error-msg" *ngIf="formUser.name == ''">
-          Name is required.
-        </div>
+    <div class="col-md-12 mb-6">
+      <label for="name">Name</label>
+      <input type="text" class="form-control {{ (formUser.name == '' || !this.isNameValid) ? 'is-invalid' : 'is-valid'}}" 
+              id="name" [(ngModel)]="formUser.name" name="name" (keyup)="validateName()" required #nameInputField="ngModel">
+      <div class="invalid-feedback error-msg" *ngIf="nameInputField.invalid && nameInputField.touched">
+        Name is required.
       </div>
+      <div class="invalid-feedback error-msg" *ngIf="!this.isNameValid && nameInputField.touched">
+        Name cannot be blank.
+      </div>
+    </div>
 
-      <div class="col-md-12 mb-6 text-right">
-        <button class="btn btn-primary" style="margin-top: 20px;" type="button" (click)="onUpdate()" [disabled]="userForm.invalid">
-          Update User
-        </button>
-      </div>
-    
-  </form>
+    <div class="col-md-12 mb-6 text-right">
+      <button class="btn btn-primary" style="margin-top: 20px;" type="button" (click)="onUpdate()" [disabled]="nameInputField.invalid || !isNameValid">
+        Update User
+      </button>
+    </div>
+  
+</form>

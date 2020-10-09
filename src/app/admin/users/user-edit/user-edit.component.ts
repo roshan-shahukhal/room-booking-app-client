@@ -15,11 +15,15 @@ export class UserEditComponent implements OnInit {
 
   formUser: User;
 
+  isNameValid = false;
+
   constructor(private dataService: DataService,
               private router: Router) {}
 
   ngOnInit(): void {
     this.formUser = Object.assign({}, this.user);
+
+    this.validateName();
   }
 
   onUpdate() {
@@ -28,5 +32,9 @@ export class UserEditComponent implements OnInit {
           this.router.navigate(['admin', 'users'], {queryParams: {id: user.id, action: 'view'}});
         }
       );
+  }
+
+  validateName() {
+    this.isNameValid = this.formUser.name.trim().length > 0;
   }
 }
