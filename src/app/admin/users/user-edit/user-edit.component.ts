@@ -16,6 +16,7 @@ export class UserEditComponent implements OnInit {
   formUser: User;
 
   isNameValid = false;
+  errorMessage: string;
 
   constructor(private dataService: DataService,
               private router: Router) {}
@@ -35,6 +36,13 @@ export class UserEditComponent implements OnInit {
   }
 
   validateName() {
-    this.isNameValid = this.formUser.name.trim().length > 0;
+    if (this.formUser.name == '') {
+      this.errorMessage = 'Name is required.';
+    } else if (this.formUser.name.trim().length === 0) {
+      this.errorMessage = 'Name cannot be blank';
+    } else {
+      this.errorMessage = null;
+      this.isNameValid = true;
+    }
   }
 }
