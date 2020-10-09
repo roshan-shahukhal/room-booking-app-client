@@ -23,7 +23,6 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.formUser = Object.assign({}, this.user);
-
     this.validateName();
   }
 
@@ -39,7 +38,7 @@ export class UserEditComponent implements OnInit {
     if (this.formUser.name == '') {
       this.errorMessage = 'Name is required.';
     } else if (this.formUser.name.trim().length === 0) {
-      this.errorMessage = 'Name cannot be blank';
+      this.errorMessage = 'Name cannot be blank.';
     } else {
       this.errorMessage = null;
       this.isNameValid = true;

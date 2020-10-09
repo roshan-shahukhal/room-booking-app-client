@@ -1,34 +1,42 @@
 <h4>Add User</h4>
 
 <form #userForm="ngForm">
-      <div class="col-md-12 mb-6">
-        <label for="name">Name</label>
-        <input type="text" class="form-control {{ formUser.name == '' ? 'is-invalid' : 'is-valid'}}" id="name" [(ngModel)]="formUser.name" name="name" required>
-        <div class="invalid-feedback error-msg" *ngIf="formUser.name == ''">
-          Name is required.
-        </div>
-      </div>
 
-      <div class="col-md-12 mb-6" *ngIf="formUser.id == null">
-        <label for="password">Password</label>
-        <input type="password" class="form-control is-valid" id="password" [(ngModel)]="password" name="password" required>
-        <div class="valid-feedback error-msg">
-          Looks good!
-        </div>
-      </div>
+  <div class="col-md-12 mb-6">
+    <label for="name">Name</label>
+    <input type="text" class="form-control {{ nameInputField.touched ? (!this.isNameValid || this.nameErrorMessage) ? 'is-invalid' : 'is-valid' : '' }}" 
+            id="name" [(ngModel)]="formUser.name" name="name" (keyup)="validateName()" required #nameInputField="ngModel">
+    <div class="invalid-feedback error-msg" *ngIf="nameInputField.invalid || this.nameErrorMessage">
+      {{ nameErrorMessage }}
+    </div>
+  </div>
 
-      <div class="col-md-12 mb-6" *ngIf="formUser.id == null">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" class="form-control is-valid" id="confirmPassword" value="" required>
-        <div class="valid-feedback error-msg">
-          Looks good!
-        </div>
-      </div>
-      
-      <div class="col-md-12 mb-6 text-right">
-        <button class="btn btn-primary" style="margin-top: 20px;" type="button" (click)="onSave()" [disabled]="userForm.invalid">
-          Save New User
-        </button>
-      </div>
-    
-  </form>
+  <div class="col-md-12 mb-6">
+    <label for="password">Password</label>
+    <input type="password" 
+          class="form-control {{ passwordInputField.touched ? (!this.isPasswordValid || this.passwordErrorMessage) ? 'is-invalid' : 'is-valid' : '' }}" 
+          id="password" [(ngModel)]="password" name="password" (keyup)="validatePassword()" required #passwordInputField="ngModel">
+    <div class="invalid-feedback error-msg">
+      {{ passwordErrorMessage }}
+    </div>
+  </div>
+
+  <div class="col-md-12 mb-6">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" class="form-control 
+          {{ confirmPasswordInputField.touched ? (!this.isConfirmPasswordValid || this.confirmPasswordErrorMessage) ? 'is-invalid' : 'is-valid' : '' }}" 
+           id="confirmPassword" name="confirmpassword" [(ngModel)]="confirmPassword" (keyup)="validateConfirmPassword()" required 
+           #confirmPasswordInputField="ngModel">
+    <div class="invalid-feedback error-msg">
+      {{ confirmPasswordErrorMessage }}
+    </div>
+  </div>
+  
+  <div class="col-md-12 mb-6 text-right">
+    <button class="btn btn-primary" style="margin-top: 20px;" type="button" (click)="onSave()" 
+          [disabled]="userForm.invalid || this.nameErrorMessage || this.passwordErrorMessage || this.confirmPasswordErrorMessage">
+      Save New User
+    </button>
+  </div>
+
+</form>
