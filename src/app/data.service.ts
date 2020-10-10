@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { User } from './model/user.model';
 import { Observable, of } from 'rxjs';
 
+import * as _ from 'lodash';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +39,12 @@ export class DataService {
     newUser.id = id + 1;
     this.users.push(newUser);
     return of(newUser);
+  }
+
+  deleteUser(user: User) {
+    _.remove(this.users, (u) => {
+      return u.id === user.id
+    });
   }
 
   constructor() { 
